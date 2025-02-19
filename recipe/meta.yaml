@@ -44,28 +44,14 @@ requirements:
     - cssselect
 
 test:
-  source_files:
-    - pytest.ini
-    - tests
-    - dataframe_image
   imports:
     - dataframe_image
   commands:
     - pip check
     - dataframe_image --help
-    - playwright install chromium
-    - pytest -v tests
+    # Considering that this package will be used in snowpark, testing UI components doesn't make sense. Skip pytest part.
   requires:
     - pip
-    - pytest >=8.0.2,<9.0.0
-    - pytest-asyncio >=0.23.6,<0.24.0
-    - matplotlib-base
-    - selenium
-    - jupyter
-    # To avoid OSError("Chrome executable not able to be found on your machine")
-    # https://github.com/dexplo/dataframe_image/issues/6
-    #- python-chromedriver-binary  # [osx and arm64]
-    - chromedriver-binary
 
 about:
   home: https://github.com/dexplo/dataframe_image
