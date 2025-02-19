@@ -53,18 +53,19 @@ test:
   commands:
     - pip check
     - dataframe_image --help
-    - playwright install chromium  # [py<313]
-    - pytest -v tests  # [py<313]
+    - playwright install chromium
+    - pytest -v tests
   requires:
     - pip
     - pytest >=8.0.2,<9.0.0
     - pytest-asyncio >=0.23.6,<0.24.0
     - matplotlib-base
-    - selenium  # [py<313]
-    - jupyter  # [py<313]
+    - selenium
+    - jupyter
     # To avoid OSError("Chrome executable not able to be found on your machine")
     # https://github.com/dexplo/dataframe_image/issues/6
-    - python-chromedriver-binary  # [osx and arm64]
+    #- python-chromedriver-binary  # [osx and arm64]
+    - chromedriver-binary
 
 about:
   home: https://github.com/dexplo/dataframe_image
