@@ -62,7 +62,7 @@ test:
     - selenium  # [py<313]
     - jupyter  # [py<313]
     # To avoid OSError("Chrome executable not able to be found on your machine")
-    - python-chromedriver-binary
+    - python-chromedriver-binary  # [osx]
 
 about:
   home: https://github.com/dexplo/dataframe_image
