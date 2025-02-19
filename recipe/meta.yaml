@@ -17,6 +17,8 @@ build:
     - dataframe_image=dataframe_image._command_line:main
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   skip: True  # [py<38]
+  # playwright-python is not avaliable on s390x
+  skip: True  # [s390x]
 
 requirements:
   host:
@@ -50,15 +52,17 @@ test:
   commands:
     - pip check
     - dataframe_image --help
-    - playwright install chromium
-    - pytest -v tests
+    - playwright install chromium  # [py<313]
+    - pytest -v tests  # [py<313]
   requires:
     - pip
     - pytest >=8.0.2,<9.0.0
     - pytest-asyncio >=0.23.6,<0.24.0
     - matplotlib-base
-    - selenium
-    - jupyter
+    - selenium  # [py<313]
+    - jupyter  # [py<313]
+    # To avoid OSError("Chrome executable not able to be found on your machine")
+    - python-chromedriver-binary
 
 about:
   home: https://github.com/dexplo/dataframe_image
