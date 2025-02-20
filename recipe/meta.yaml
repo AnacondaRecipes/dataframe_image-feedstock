@@ -43,15 +43,29 @@ requirements:
     - playwright-python
     - cssselect
 
+# Considering that this package will be used in snowpark, testing UI components doesn't make sense. Skip pytest part.
+# Tests works locally on osx-arm64 and win-64.
+# To enable the test just uncomment the test section bellow.
+
 test:
+  #source_files:
+  #  - pytest.ini
+  #  - tests
+  #  - dataframe_image
   imports:
     - dataframe_image
   commands:
     - pip check
     - dataframe_image --help
-    # Considering that this package will be used in snowpark, testing UI components doesn't make sense. Skip pytest part.
+  # - playwright install chromium
+  # - pytest -v tests
   requires:
     - pip
+  # - pytest >=8.0.2,<9.0.0
+  # - pytest-asyncio >=0.23.6,<0.24.0
+  # - matplotlib-base
+  # - selenium
+  # - jupyter
 
 about:
   home: https://github.com/dexplo/dataframe_image
