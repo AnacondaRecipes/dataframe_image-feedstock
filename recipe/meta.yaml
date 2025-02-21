@@ -73,7 +73,7 @@ about:
   license: MIT
   license_family: MIT
   license_file: LICENSE
-  desciption: |
+  description: |
     A package to convert pandas DataFrames as images.
     Also convert Jupyter Notebooks to PDF and/or Markdown embedding dataframe as image into it.
   dev_url: https://github.com/dexplo/dataframe_image
