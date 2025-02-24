@@ -1,50 +1,82 @@
 {% set name = "dataframe_image" %}
-{% set version = "0.1.1" %}
-
+{% set version = "0.2.7" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 8d6739da53c66bd557f217237bab45943a452760b808bb7a3e635a939eed0bb5
+  url: https://github.com/dexplo/dataframe_image/archive/v{{ version }}.tar.gz
+  sha256: 6d96368cbf64e8291587242bd6442ed2961cc021a06d2ccf1d309fe460e77831
 
 build:
   number: 0
-  noarch: python
+  script_env:
+    - SETUPTOOLS_SCM_PRETEND_VERSION={{ version }}
   entry_points:
     - dataframe_image=dataframe_image._command_line:main
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  skip: True  # [py<38]
+  # playwright-python is not available on s390x
+  skip: True  # [s390x]
 
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python
+    - wheel
+    - setuptools
+    - setuptools_scm
   run:
-    - aiohttp
-    - beautifulsoup4
-    - matplotlib-base >=3.1
-    - nbconvert >=5
+    - python
     - pandas >=0.24
-    - python >=3.6
+    - nbconvert >=5
+    - aiohttp >=3.10.2
     - requests
+    - pillow
+    - packaging
+    - mistune
+    - lxml
+    - beautifulsoup4
+    - cssutils
+    - playwright-python
+    - cssselect
+
+# Considering that this package will be used in snowpark, testing UI components doesn't make sense. Skip pytest part.
+# Tests works locally on osx-arm64 and win-64.
+# To enable the test just uncomment the test section bellow.
 
 test:
+  #source_files:
+  #  - pytest.ini
+  #  - tests
+  #  - dataframe_image
   imports:
     - dataframe_image
-    - tests
   commands:
     - pip check
     - dataframe_image --help
+  # - playwright install chromium
+  # - pytest -v tests
   requires:
     - pip
+  # - pytest >=8.0.2,<9.0.0
+  # - pytest-asyncio >=0.23.6,<0.24.0
+  # - matplotlib-base
+  # - selenium
+  # - jupyter
 
 about:
   home: https://github.com/dexplo/dataframe_image
   summary: Embed pandas DataFrames as images in pdf and markdown files when converting from Jupyter Notebooks
   license: MIT
+  license_family: MIT
   license_file: LICENSE
+  description: |
+    A package to convert pandas DataFrames as images.
+    Also convert Jupyter Notebooks to PDF and/or Markdown embedding dataframe as image into it.
+  dev_url: https://github.com/dexplo/dataframe_image
+  doc_url: https://dexplo.org/dataframe_image
 
 extra:
   recipe-maintainers:
