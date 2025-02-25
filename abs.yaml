@@ -3,9 +3,3 @@ build_env_vars:
 
 upload_channels:
   - sfe1ed40
-
-channels:
-  - https://staging.continuum.io/prefect/fs/cssutils-feedstock/pr2/f11bedb  # cssutils
-  - https://staging.continuum.io/prefect/fs/pyee-feedstock/pr4/2afa42c  # pyee
-  - https://staging.continuum.io/prefect/fs/playwright-python-feedstock/pr1/d72788b  # playwright-python
-  - https://staging.continuum.io/prefect/fs/playwright-feedstock/pr1/1906bac  # playwright
