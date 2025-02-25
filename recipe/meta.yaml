@@ -16,8 +16,7 @@ build:
   entry_points:
     - dataframe_image=dataframe_image._command_line:main
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  # nbconvert is not available for py313
-  skip: True  # [py<38 or py>312]
+  skip: True  # [py<38]
   # playwright-python is not available on s390x
   skip: True  # [s390x]
 
